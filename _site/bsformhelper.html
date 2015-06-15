@@ -105,11 +105,69 @@ $this->BsForm->input('User.name', array('label' => 'Full Name', 'state' => 'succ
                     <br>
                     <li>[Added] state - Change the state of the input to 'error', 'warning' or 'success'</li>
                     <li>[Added] help - Add a message under the input to give more informations</li>
+                    <li>[Added] length-detector-option - Combine with the class 'length-detector', display the length-detector</li>
                 </ul>
             </li>
         </ul>
 
         <br>
+        <p> New features - Length Detector. This new feature display how many characters are typed and maxlength. It may also change the style of the indicator and set a custom message. It could be configure by many options. </p>
+<pre>
+<code class="php">&lt;?php echo 
+$this->BsForm->input('User.name', array('label' => 'Full Name', 'class' => 'length-detector', 'maxlength' => 40, 'length-detector-option' => array('class' => 'name', 'alwaysShow' => true, 'interval' => array(array('limitChars' => 20, 'bsClass' => 'warning', 'message' => 'Too short name.')))));
+?&gt;
+</code>
+</pre>
+<pre class="result">
+<code class="html">?? A voir ?? 
+</code>
+</pre>
+        <h4 class="parameters">Length detector option</h4>
+        <ul>
+            <li><code>[boolean] alwaysShow</code> - [Default] false - If true the threshold will be ignored and the remaining length indication will be always showing up while typing or on focus on the input.</li>
+            <li><code>[int] threshold</code> - [Default] 10 - This is a number indicating how many chars are left to start displaying the indications.</li>
+            <li><code>[String] defaultClass</code> - [Default] 'warning' - It's the class of the element with the indicator when the interval is not defined.</li>
+            <li><code>[String] limitReachedClass</code> - [Default] 'danger' - It's the class the element gets when the limit is reached.</li>
+            <li><code>[String] separator</code> - [Default] ' / ' - Represents the separator between the number of typed chars and total number of available chars.</li>
+            <li><code>[String] preText</code> - [Default] '' - Outputted in front of the indicator.</li>
+            <li><code>[String] postText</code> - [Default] '' - Outputted after the indicator.</li>
+            <li><code>[boolean] showMaxLength</code> - [Default] true - If false, will display just the number of typed characters, e.g. will not display the max length.</li>
+            <li><code>[boolean] showCharsTyped</code> - [Default] true - If false, will display just the remaining length, e.g. will display remaining lenght instead of number of typed characters.</li>
+            <li><code>[String, Object, function] placement</code> - [Default] 'top' - Define where to output the counter.
+              <ul>
+                <li>Possible String values are: bottom ( default option ), left, top, right, bottom-right, top-right, top-left, bottom-left and centered-right.
+                </li>
+                <li>Custom placements can be passed as an object, with keys top, right, bottom, left, and position. These are passed to $.fn.css.
+                </li>
+                <li>A custom function may also be passed. This method is invoked with the {$element} Current Input, the {$element} MaxLength Indicator, and the Current Input's Position {bottom height left right top width}.
+                </li>
+              </ul>
+            </li>
+            <li><code>[boolean] appendToParent</code> - [Default] false - appends the length detector indicator badge to the parent of the input rather than to the body.</li>
+            <li><code>[String, function] message</code> - [Default] '' - An alternative way to provide the message text, i.e. 'You have typed %charsTyped% chars, %charsRemaining% of %charsTotal% remaining'. %charsTyped%, %charsRemaining% and %charsTotal% will be replaced by the actual values. This overrides the options separator, preText, postText and showMaxLength. Alternatively you may supply a function that the current text and max length and returns the string to be displayed. <code>function(currentText, maxLength) { return '' + Math.ceil(currentText.length / 160) + ' SMS Message(s)'; }</code></li>
+            <li><code>[boolean] utf8</code> - [Default] false - If true the input will count using utf8 bytesize/encoding. For example: the '£' character is counted as two characters.</li>
+            <li><code>[boolean] twoCharLinebreak</code> - [Default] true - count linebreak as 2 characters to match IE/Chrome textarea validation.</li>
+            <li><code>[boolean] customMaxAttribute</code> - [Default] true - allows a custom maxlength attribute to allow exceeding maxlength. 'overmax' class gets added when exceeded to allow user to implement form validation</li>
+            <li><code>[boolean] twoCharLinebreak</code> - [Default] true - count linebreak as 2 characters to match IE/Chrome textarea validation.</li>
+            <li><code>[boolean] twoCharLinebreak</code> - [Default] true - count linebreak as 2 characters to match IE/Chrome textarea validation.</li>
+            <li><code>[boolean] twoCharLinebreak</code> - [Default] true - count linebreak as 2 characters to match IE/Chrome textarea validation.</li>
+            <li><code>[Object] interval</code> - [Default] '' - Define some interval of caract typed with their own style and message. To set an interval you have to set a limitChars and a bsClass.
+              <ul>
+                <li><code>[int] limitChars</code> Number of characters limit to the interval.</li>
+                <li><code>[String, Object] bsClass</code> Define the style of the length detector indicator.
+                  <ul>
+                    <li>String : <code>bsClass => 'success'</code></li>
+                    <li>Object : <code>bsClass => array('background-color' => '#6495ED', 'color' => 'midnightblue')</code></li>
+                  </ul>
+                </li>
+                <li><code>[message] message</code> Message to display for the interval.
+                </li>
+              </ul>
+            </li>
+        </ul>
+
+        <br>
+
 
 <!-- Fonction INPUTGROUP -->
         <h3>inputGroup()</h3>
